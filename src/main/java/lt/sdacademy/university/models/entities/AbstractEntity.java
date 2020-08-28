@@ -1,16 +1,34 @@
 package lt.sdacademy.university.models.entities;
 
-public class AbstractEntity {
+public abstract class AbstractEntity {
 
     private static final int ODD_PRIME = 31;
 
-    private Integer id;
+    private Long id;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId() == null ? 0 : ODD_PRIME * getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (getId() == null || obj == null || !(getClass().equals(obj.getClass()))) {
+            return false;
+        }
+
+        return getId().equals(((AbstractEntity) obj).getId());
     }
 }
