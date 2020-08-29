@@ -69,6 +69,31 @@ public class PersonRepository {
         }
     }
 
+    public void savePerson(PersonEntity person) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO person (name, surname, gender) VALUES (?, ?, ?)");
+            ps.setString(1, person.getName());
+            ps.setString(2, person.getSurname());
+            ps.setString(3, person.getGender().toString().toLowerCase());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePerson(PersonEntity person) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE person SET name = ?, surname = ?, gender = ? WHERE id = ?");
+            ps.setString(1, person.getName());
+            ps.setString(2, person.getSurname());
+            ps.setString(3, person.getGender().toString().toLowerCase());
+            ps.setLong(4, person.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private PersonEntity getPerson(ResultSet resultSet) throws SQLException {
         PersonEntity result = new PersonEntity();
 
