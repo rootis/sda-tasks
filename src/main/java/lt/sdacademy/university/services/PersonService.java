@@ -20,6 +20,10 @@ public class PersonService {
         return personRepository.getPerson(id);
     }
 
+    public PersonEntity getPersonBySurname(String surname) {
+        return personRepository.getPersonBySurname(surname);
+    }
+
     public void delete() {
         personRepository.delete();
     }

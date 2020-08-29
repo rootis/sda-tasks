@@ -56,6 +56,20 @@ class PersonServiceTest {
     }
 
     @Test
+    void getPersonBySurname() {
+        PersonEntity result = personService.getPersonBySurname("Turcinas");
+
+        assertNotNull(result);
+    }
+
+    @Test
+    void getPersonBySurname_notExists() {
+        PersonEntity result = personService.getPersonBySurname("SDA");
+
+        assertNull(result);
+    }
+
+    @Test
     void getPerson_notExists() {
         PersonEntity result = personService.getPerson(-1L);
 

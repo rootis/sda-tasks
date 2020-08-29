@@ -60,6 +60,21 @@ public class PersonRepository {
         return null;
     }
 
+    public PersonEntity getPersonBySurname(String surname) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM person WHERE surname = ?");
+            ps.setString(1, surname);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return getPerson(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public void delete() {
         try {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM person");
