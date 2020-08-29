@@ -45,6 +45,21 @@ public class PersonRepository {
         }
     }
 
+    public PersonEntity getPerson(Long id) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM person WHERE id = ?");
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return getPerson(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public void delete() {
         try {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM person");

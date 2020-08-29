@@ -16,6 +16,10 @@ public class PersonService {
         return personRepository.getPersons();
     }
 
+    public PersonEntity getPerson(Long id) {
+        return personRepository.getPerson(id);
+    }
+
     public void delete() {
         personRepository.delete();
     }

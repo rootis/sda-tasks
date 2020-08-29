@@ -1,6 +1,8 @@
 package lt.sdacademy.university.services;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.SQLException;
@@ -44,6 +46,20 @@ class PersonServiceTest {
         List<PersonEntity> people = personService.getPersons();
 
         assertFalse(people.isEmpty());
+    }
+
+    @Test
+    void getPerson() {
+        PersonEntity result = personService.getPerson(1L);
+
+        assertNotNull(result);
+    }
+
+    @Test
+    void getPerson_notExists() {
+        PersonEntity result = personService.getPerson(-1L);
+
+        assertNull(result);
     }
 
     @Test
