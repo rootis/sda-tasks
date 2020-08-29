@@ -20,23 +20,23 @@ class PersonServiceTest {
 
     @BeforeAll
     static void init() throws SQLException {
-        lt.sdacademy.university.services.ConnectionService.getConnection().setAutoCommit(false);
+        ConnectionService.getConnection().setAutoCommit(false);
     }
 
     @BeforeEach
     void setUp() throws SQLException {
-        sp = lt.sdacademy.university.services.ConnectionService.getConnection().setSavepoint();
+        sp = ConnectionService.getConnection().setSavepoint();
         personService = new PersonService();
     }
 
     @AfterEach
     void tearDown() throws SQLException {
-        lt.sdacademy.university.services.ConnectionService.getConnection().rollback(sp);
+        ConnectionService.getConnection().rollback(sp);
     }
 
     @AfterAll
     static void rollback() throws SQLException {
-        lt.sdacademy.university.services.ConnectionService.getConnection().rollback();
+        ConnectionService.getConnection().rollback();
     }
 
     @Test
