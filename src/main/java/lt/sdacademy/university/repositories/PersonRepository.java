@@ -1,122 +1,80 @@
 package lt.sdacademy.university.repositories;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
-import lt.sdacademy.university.models.Gender;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import lt.sdacademy.university.models.entities.PersonEntity;
 import lt.sdacademy.university.services.ConnectionService;
 
 public class PersonRepository {
 
-    private final Connection connection;
+    private final EntityManagerFactory entityManagerFactory;
 
     public PersonRepository() {
-        this.connection = ConnectionService.getConnection();
+        this.entityManagerFactory = ConnectionService.getSessionFactory();
     }
 
-    public List<PersonEntity> getPersons() {
-        List<PersonEntity> result = new ArrayList<>();
-
+    public void save(PersonEntity person) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
         try {
-            Statement s = connection.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM person");
-            while (rs.next()) {
-                result.add(getPerson(rs));
-            }
-        } catch (SQLException e) {
+            em.persist(person);
+            transaction.commit();
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        return result;
-    }
-
-    public void delete(Long id) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM person WHERE id = ?");
-            ps.setLong(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public PersonEntity getPerson(Long id) {
+    public void update(PersonEntity person) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM person WHERE id = ?");
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return getPerson(rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public PersonEntity getPersonBySurname(String surname) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM person WHERE surname = ?");
-            ps.setString(1, surname);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return getPerson(rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public void delete() {
-        try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM person");
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            em.merge(person);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
         }
     }
 
-    public void savePerson(PersonEntity person) {
+    public void delete(PersonEntity person) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO person (name, surname, gender) VALUES (?, ?, ?)");
-            ps.setString(1, person.getName());
-            ps.setString(2, person.getSurname());
-            ps.setString(3, person.getGender().toString().toLowerCase());
-            ps.executeUpdate();
-        } catch (SQLException e) {
+            em.remove(person);
+            transaction.commit();
+        } catch (Exception e) {
             e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public void updatePerson(PersonEntity person) {
+    public void delete(List<PersonEntity> persons) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE person SET name = ?, surname = ?, gender = ? WHERE id = ?");
-            ps.setString(1, person.getName());
-            ps.setString(2, person.getSurname());
-            ps.setString(3, person.getGender().toString().toLowerCase());
-            ps.setLong(4, person.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
+            this.delete(em, persons);
+            transaction.commit();
+        } catch (Exception e) {
             e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    private PersonEntity getPerson(ResultSet resultSet) throws SQLException {
-        PersonEntity result = new PersonEntity();
+    public void delete(EntityManager em, List<PersonEntity> persons) {
+        persons.forEach(em::remove);
+    }
 
-        result.setId(resultSet.getLong("id"));
-        result.setName(resultSet.getString("name"));
-        result.setSurname(resultSet.getString("surname"));
-        result.setGender(Gender.valueOf(resultSet.getString("gender").toUpperCase()));
+    public PersonEntity findOne(Integer id) {
+        return entityManagerFactory.createEntityManager().find(PersonEntity.class, id);
+    }
 
-        return result;
+    public List<PersonEntity> findAll() {
+        return entityManagerFactory.createEntityManager().createQuery("from PersonEntity", PersonEntity.class).getResultList();
     }
 }

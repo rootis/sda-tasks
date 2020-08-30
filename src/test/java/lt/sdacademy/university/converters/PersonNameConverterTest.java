@@ -23,7 +23,6 @@ class PersonNameConverterTest {
         person.setId(2L);
         person.setName("Test");
         person.setSurname("Tester");
-        person.setGender(Gender.MALE);
         String expectedFullName = "Test Tester";
 
         PersonName result = personNameConverter.convert(person);
