@@ -1,25 +1,41 @@
 package lt.sdacademy.university.services;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import java.util.List;
-import lt.sdacademy.university.models.dto.StudyProgram;
-import org.junit.jupiter.api.BeforeEach;
+import javax.transaction.Transactional;
+import lt.sdacademy.university.models.entities.ModuleEntity;
+import lt.sdacademy.university.models.entities.StudyProgramEntity;
+import lt.sdacademy.university.models.entities.UniversityEntity;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
+@Transactional
 class StudyProgramServiceTest {
 
+    @Autowired
+    private UniversityService universityService;
+
+    @Autowired
     private StudyProgramService studyProgramService;
 
-    @BeforeEach
-    void setUp() {
-        studyProgramService = new StudyProgramService();
-    }
-
     @Test
-    void getStudyPrograms() {
-        List<StudyProgram> result = studyProgramService.getStudyPrograms();
+    void getStudyProgramByTitle() {
+        UniversityEntity university = new UniversityEntity();
+        university.setTitle("Test University");
+        university.setCode("TU");
+        StudyProgramEntity studyProgram = new StudyProgramEntity();
+        studyProgram.setTitle("Test Study Program");
+        studyProgram.setUniversity(university);
+        ModuleEntity module = new ModuleEntity();
+        module.setTitle("Test Module");
+        studyProgram.getModules().add(module);
+        university.getStudyPrograms().add(studyProgram);
+        universityService.save(university);
 
-        assertTrue(result.isEmpty());
+        StudyProgramEntity result = studyProgramService.getStudyProgramByTitle("Test Study Program");
+
+        assertFalse(result.getModules().isEmpty());
     }
 }
