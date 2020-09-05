@@ -1,6 +1,7 @@
 package lt.sdacademy.university.services;
 
 import java.util.List;
+import lt.sdacademy.university.models.Gender;
 import lt.sdacademy.university.models.entities.StudentEntity;
 import lt.sdacademy.university.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,9 @@ public class StudentService {
 
     public List<StudentEntity> getStudents() {
         return studentRepository.findAll();
+    }
+
+    public List<StudentEntity> getStudentsByGender(Gender gender) {
+        return studentRepository.findAllByPersonGender(gender);
     }
 }
