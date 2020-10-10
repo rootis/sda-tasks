@@ -1,5 +1,6 @@
 package lt.sdacademy.university.repositories;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,10 +27,27 @@ public class PersonRepository {
                 person.setGender(Gender.valueOf(rs.getString("gender")));
                 result.add(person);
             }
+
+            rs.close();
+            s.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
         return result;
+    }
+
+    public void save(PersonEntity person) {
+        String query = "INSERT INTO person (name, surname, gender) VALUES (?, ?, ?)";
+
+        try {
+            PreparedStatement ps = ConnectionService.getConnection().prepareStatement(query);
+            ps.setString(1, person.getName());
+            ps.setString(2, person.getSurname());
+            ps.setString(3, person.getGender().toString());
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
