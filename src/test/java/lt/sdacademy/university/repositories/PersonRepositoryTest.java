@@ -2,6 +2,7 @@ package lt.sdacademy.university.repositories;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.security.InvalidParameterException;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 import java.util.List;
@@ -58,5 +59,43 @@ class PersonRepositoryTest {
         personRepository.save(person);
 
         assertEquals(oldSize + 1, personRepository.findAll().size());
+    }
+
+    @Test
+    void update() {
+        PersonEntity person = personRepository.findOne(1L);
+        person.setName("Modified Name");
+        person.setSurname("Modified Surname");
+
+        personRepository.update(person);
+        PersonEntity result = personRepository.findOne(1L);
+
+        assertEquals("Modified Name", result.getName());
+        assertEquals("Modified Surname", result.getSurname());
+    }
+
+    @Test
+    void update_idIsNull() {
+        PersonEntity person = personRepository.findOne(1L);
+        person.setName("Modified Name");
+        person.setSurname("Modified Surname");
+        person.setId(null);
+
+        assertThrows(InvalidParameterException.class, () -> personRepository.update(person));
+    }
+
+    @Test
+    void delete() {
+        PersonEntity person = new PersonEntity();
+        person.setName("Test Name");
+        person.setSurname("Test Surname");
+        person.setGender(Gender.male);
+        personRepository.save(person);
+        List<PersonEntity> people = personRepository.findAll();
+        Integer oldSize = people.size();
+
+        personRepository.delete(people.get(oldSize - 1).getId());
+
+        assertEquals(oldSize - 1, personRepository.findAll().size());
     }
 }
