@@ -15,7 +15,7 @@ public class PersonRepository {
         this.entityManagerFactory = ConnectionService.getSessionFactory();
     }
 
-    public void save(PersonEntity person) {
+    public PersonEntity save(PersonEntity person) {
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
@@ -26,6 +26,8 @@ public class PersonRepository {
             e.printStackTrace();
             transaction.rollback();
         }
+
+        return person;
     }
 
     public void update(PersonEntity person) {
