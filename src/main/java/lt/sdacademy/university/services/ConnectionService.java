@@ -2,6 +2,8 @@ package lt.sdacademy.university.services;
 
 import java.util.Properties;
 import lt.sdacademy.university.models.entities.PersonEntity;
+import lt.sdacademy.university.models.entities.StudentEntity;
+import lt.sdacademy.university.models.entities.StudyProgramEntity;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -28,6 +30,8 @@ public final class ConnectionService {
             configuration.setProperties(settings);
 
             configuration.addAnnotatedClass(PersonEntity.class);
+            configuration.addAnnotatedClass(StudentEntity.class);
+            configuration.addAnnotatedClass(StudyProgramEntity.class);
 
             sessionFactory = configuration.buildSessionFactory(
                 new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build()
