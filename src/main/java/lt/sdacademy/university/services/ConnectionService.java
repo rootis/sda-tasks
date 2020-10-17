@@ -1,6 +1,7 @@
 package lt.sdacademy.university.services;
 
 import java.util.Properties;
+import lt.sdacademy.university.models.entities.ModuleEntity;
 import lt.sdacademy.university.models.entities.PersonEntity;
 import lt.sdacademy.university.models.entities.StudentEntity;
 import lt.sdacademy.university.models.entities.StudyProgramEntity;
@@ -29,6 +30,7 @@ public final class ConnectionService {
             settings.put(Environment.ALLOW_JTA_TRANSACTION_ACCESS, "true");
             configuration.setProperties(settings);
 
+            configuration.addAnnotatedClass(ModuleEntity.class);
             configuration.addAnnotatedClass(PersonEntity.class);
             configuration.addAnnotatedClass(StudentEntity.class);
             configuration.addAnnotatedClass(StudyProgramEntity.class);

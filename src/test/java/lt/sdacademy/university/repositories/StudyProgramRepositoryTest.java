@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import lt.sdacademy.university.models.Gender;
 import lt.sdacademy.university.models.StudyType;
+import lt.sdacademy.university.models.entities.ModuleEntity;
 import lt.sdacademy.university.models.entities.PersonEntity;
 import lt.sdacademy.university.models.entities.StudentEntity;
 import lt.sdacademy.university.models.entities.StudyProgramEntity;
@@ -25,6 +26,7 @@ class StudyProgramRepositoryTest {
         StudyProgramEntity result = studyProgramRepository.findOne(1L);
 
         assertFalse(result.getStudents().isEmpty());
+        assertFalse(result.getModules().isEmpty());
     }
 
     @Test
@@ -48,6 +50,25 @@ class StudyProgramRepositoryTest {
         assertNotNull(result.getId());
         assertEquals(oldSize + 1, studyProgramRepository.findAll().size());
         assertEquals(1, studyProgramRepository.findOne(result.getId()).getStudents().size());
+        studyProgramRepository.delete(result);
+        assertEquals(oldSize, studyProgramRepository.findAll().size());
+    }
+
+    @Test
+    void save_withNewModule() {
+        Integer oldSize = studyProgramRepository.findAll().size();
+        StudyProgramEntity studyProgram = new StudyProgramEntity();
+        studyProgram.setUniversityId(1L);
+        studyProgram.setTitle("Test Study Program");
+        ModuleEntity module = new ModuleEntity();
+        module.setTitle("Test Module");
+        studyProgram.getModules().add(module);
+
+        StudyProgramEntity result = studyProgramRepository.save(studyProgram);
+
+        assertNotNull(result.getId());
+        assertEquals(oldSize + 1, studyProgramRepository.findAll().size());
+        assertEquals(1, studyProgramRepository.findOne(result.getId()).getModules().size());
         studyProgramRepository.delete(result);
         assertEquals(oldSize, studyProgramRepository.findAll().size());
     }
