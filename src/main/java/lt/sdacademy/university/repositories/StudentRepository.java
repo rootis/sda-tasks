@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import lt.sdacademy.university.models.Gender;
 import lt.sdacademy.university.models.entities.StudentEntity;
 import lt.sdacademy.university.services.ConnectionService;
 
@@ -22,6 +24,14 @@ public class StudentRepository {
 
     public StudentEntity findOne(Long id) {
         return em.find(StudentEntity.class, id);
+    }
+
+    public List<StudentEntity> findByPersonGender(Gender gender) {
+        String hqlQuery = "select s from StudentEntity s where s.person.gender=:gender";
+        Query query = em.createQuery(hqlQuery, StudentEntity.class);
+        query.setParameter("gender", gender);
+
+        return query.getResultList();
     }
 
     public StudentEntity save(StudentEntity student) {

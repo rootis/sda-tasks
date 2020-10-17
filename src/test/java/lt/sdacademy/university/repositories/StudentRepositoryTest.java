@@ -1,12 +1,11 @@
 package lt.sdacademy.university.repositories;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
 import java.util.List;
 import lt.sdacademy.university.models.Gender;
-import lt.sdacademy.university.models.StudyType;
-import lt.sdacademy.university.models.entities.PersonEntity;
 import lt.sdacademy.university.models.entities.StudentEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,5 +32,13 @@ class StudentRepositoryTest {
 
         assertNotNull(result);
         assertNotNull(result.getStudyProgram());
+    }
+
+    @Test
+    void findByPersonGender() {
+        List<StudentEntity> result = studentRepository.findByPersonGender(Gender.male);
+
+        assertFalse(result.isEmpty());
+        assertTrue(result.size() < studentRepository.findAll().size());
     }
 }
