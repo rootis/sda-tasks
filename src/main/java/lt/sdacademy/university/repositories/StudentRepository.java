@@ -12,6 +12,14 @@ public class StudentRepository extends AbstractRepository<StudentEntity> {
         return StudentEntity.class;
     }
 
+    public List<StudentEntity> findByPersonLikeName(String nameStart) {
+        String hqlQuery = "select s from StudentEntity s where s.person.name LIKE :nameStart";
+        Query query = em.createQuery(hqlQuery, StudentEntity.class);
+        query.setParameter("nameStart", nameStart);
+
+        return query.getResultList();
+    }
+
     public List<StudentEntity> findByPersonGender(Gender gender) {
         String hqlQuery = "select s from StudentEntity s where s.person.gender=:gender";
         Query query = em.createQuery(hqlQuery, StudentEntity.class);

@@ -41,4 +41,12 @@ class StudentRepositoryTest {
         assertFalse(result.isEmpty());
         assertTrue(result.size() < studentRepository.findAll().size());
     }
+
+    @Test
+    void findByPersonLikeName() {
+        List<StudentEntity> result = studentRepository.findByPersonLikeName("K%");
+
+        assertFalse(result.isEmpty());
+        assertTrue(result.size() < studentRepository.findAll().size());
+    }
 }
