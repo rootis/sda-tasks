@@ -1,10 +1,12 @@
 package lt.sdacademy.university.services;
 
 import java.util.Properties;
+import lt.sdacademy.university.models.entities.LecturerEntity;
 import lt.sdacademy.university.models.entities.ModuleEntity;
 import lt.sdacademy.university.models.entities.PersonEntity;
 import lt.sdacademy.university.models.entities.StudentEntity;
 import lt.sdacademy.university.models.entities.StudyProgramEntity;
+import lt.sdacademy.university.models.entities.UniversityEntity;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -30,10 +32,12 @@ public final class ConnectionService {
             settings.put(Environment.ALLOW_JTA_TRANSACTION_ACCESS, "true");
             configuration.setProperties(settings);
 
+            configuration.addAnnotatedClass(LecturerEntity.class);
             configuration.addAnnotatedClass(ModuleEntity.class);
             configuration.addAnnotatedClass(PersonEntity.class);
             configuration.addAnnotatedClass(StudentEntity.class);
             configuration.addAnnotatedClass(StudyProgramEntity.class);
+            configuration.addAnnotatedClass(UniversityEntity.class);
 
             sessionFactory = configuration.buildSessionFactory(
                 new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build()
