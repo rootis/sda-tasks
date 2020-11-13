@@ -1,4 +1,4 @@
-package lt.sdacademy.university.tasks.fundamentals;
+package lt.sdacademy.advanced.tasks.fundamentals;
 
 public class ATask {
 

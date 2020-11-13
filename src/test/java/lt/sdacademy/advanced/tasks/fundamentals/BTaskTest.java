@@ -1,4 +1,4 @@
-package lt.sdacademy.university.tasks.fundamentals;
+package lt.sdacademy.advanced.tasks.fundamentals;
 
 import static org.junit.jupiter.api.Assertions.*;
 
