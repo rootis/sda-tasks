@@ -12,6 +12,18 @@ public class ShoppingCartService {
         devices.add(device);
     }
 
+    public Device getTheMostExpensive() {
+        Device result = null;
+
+        for (Device device : devices) {
+            if (result == null || device.getPrice().compareTo(result.getPrice()) > 0) {
+                result = device;
+            }
+        }
+
+        return result;
+    }
+
     public List<Device> getDevices() {
         return devices;
     }
