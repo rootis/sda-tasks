@@ -1,7 +1,10 @@
 package lt.sdacademy.advanced.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lt.sdacademy.advanced.models.devices.Device;
 
 public class ShoppingCartService {
@@ -10,6 +13,10 @@ public class ShoppingCartService {
 
     public void addDevice(Device device) {
         devices.add(device);
+    }
+
+    public void addDevices(Device... deviceList) {
+        devices.addAll(Arrays.asList(deviceList));
     }
 
     public Device getTheMostExpensive() {
@@ -44,6 +51,19 @@ public class ShoppingCartService {
         }
 
         return devices;
+    }
+
+    public Map<String, List<Device>> groupByName() {
+        Map<String, List<Device>> result = new HashMap<>();
+
+        for (Device device : devices) {
+            if (!result.containsKey(device.getName())) {
+                result.put(device.getName(), new ArrayList<>());
+            }
+            result.get(device.getName()).add(device);
+        }
+
+        return result;
     }
 
     public List<Device> getDevices() {
