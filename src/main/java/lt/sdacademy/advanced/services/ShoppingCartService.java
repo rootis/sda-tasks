@@ -34,6 +34,18 @@ public class ShoppingCartService {
         return result;
     }
 
+    public List<Device> getDevicesByName(String name) {
+        List<Device> devices = new ArrayList<>();
+
+        for (Device device : this.devices) {
+            if (device.getName().equals(name)) {
+                devices.add(device);
+            }
+        }
+
+        return devices;
+    }
+
     public List<Device> getDevices() {
         return devices;
     }
