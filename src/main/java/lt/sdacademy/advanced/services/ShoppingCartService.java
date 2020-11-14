@@ -24,6 +24,16 @@ public class ShoppingCartService {
         return result;
     }
 
+    public List<String> getDeviceNames() {
+        List<String> result = new ArrayList<>();
+
+        for (Device device : devices) {
+            result.add(device.getName());
+        }
+
+        return result;
+    }
+
     public List<Device> getDevices() {
         return devices;
     }

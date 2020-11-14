@@ -1,10 +1,12 @@
 package lt.sdacademy.advanced.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import lt.sdacademy.advanced.models.devices.Device;
 import lt.sdacademy.advanced.models.devices.Keyboard;
@@ -49,5 +51,23 @@ class ShoppingCartServiceTest {
         Device device = shoppingCartService.getTheMostExpensive();
 
         assertEquals(monitor, device);
+    }
+
+    @Test
+    void getDeviceNames() {
+        Mouse mouse = new Mouse(false, new BigDecimal(25));
+        Keyboard keyboard = new Keyboard(false, new BigDecimal(45));
+        Monitor monitor = new Monitor(27, new BigDecimal(600));
+
+        shoppingCartService.addDevice(mouse);
+        shoppingCartService.addDevice(keyboard);
+        shoppingCartService.addDevice(monitor);
+
+        List<String> result = shoppingCartService.getDeviceNames();
+
+        assertEquals(3, result.size());
+        assertTrue(result.contains(mouse.getName()));
+        assertTrue(result.contains(keyboard.getName()));
+        assertTrue(result.contains(monitor.getName()));
     }
 }
