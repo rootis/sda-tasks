@@ -66,6 +66,20 @@ public class ShoppingCartService {
         return result;
     }
 
+    public Map<String, Integer> calculateDeviceAmounts() {
+        Map<String, Integer> result = new HashMap<>();
+
+        for (Device device : devices) {
+            if (!result.containsKey(device.getName())) {
+                result.put(device.getName(), 0);
+            }
+            Integer oldDevicesAmount = result.get(device.getName());
+            result.put(device.getName(), oldDevicesAmount + 1);
+        }
+
+        return result;
+    }
+
     public List<Device> getDevices() {
         return devices;
     }

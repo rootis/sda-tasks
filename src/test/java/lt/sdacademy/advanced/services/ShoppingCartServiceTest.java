@@ -77,6 +77,30 @@ class ShoppingCartServiceTest {
     }
 
     @Test
+    void getDevicesByName_nameIsNull() {
+        Mouse mouse = new Mouse(false, new BigDecimal(25));
+        Keyboard keyboard = new Keyboard(false, new BigDecimal(45));
+        Monitor monitor = new Monitor(27, new BigDecimal(600));
+        shoppingCartService.addDevices(mouse, keyboard, monitor);
+
+        List<Device> result = shoppingCartService.getDevicesByName(null);
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void getDevicesByName_nameIsEmptyString() {
+        Mouse mouse = new Mouse(false, new BigDecimal(25));
+        Keyboard keyboard = new Keyboard(false, new BigDecimal(45));
+        Monitor monitor = new Monitor(27, new BigDecimal(600));
+        shoppingCartService.addDevices(mouse, keyboard, monitor);
+
+        List<Device> result = shoppingCartService.getDevicesByName("    ");
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
     void groupByName() {
         Mouse m1 = new Mouse(false, new BigDecimal(25));
         Mouse m2 = new Mouse(false, new BigDecimal(29));
@@ -93,5 +117,22 @@ class ShoppingCartServiceTest {
         assertTrue(result.get(k1.getName()).contains(k1));
         assertTrue(result.get(k1.getName()).contains(k2));
         assertTrue(result.get(monitor.getName()).contains(monitor));
+    }
+
+    @Test
+    void calculateDeviceAmounts() {
+        Mouse m1 = new Mouse(false, new BigDecimal(25));
+        Mouse m2 = new Mouse(false, new BigDecimal(29));
+        Keyboard k1 = new Keyboard(false, new BigDecimal(45));
+        Keyboard k2 = new Keyboard(false, new BigDecimal(52));
+        Monitor monitor = new Monitor(27, new BigDecimal(600));
+        shoppingCartService.addDevices(m1, m2, k1, k2, monitor);
+
+        Map<String, Integer> result = shoppingCartService.calculateDeviceAmounts();
+
+        assertEquals(3, result.keySet().size());
+        assertEquals(2, result.get(m1.getName()));
+        assertEquals(2, result.get(k1.getName()));
+        assertEquals(1, result.get(monitor.getName()));
     }
 }
