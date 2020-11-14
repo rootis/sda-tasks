@@ -1,10 +1,14 @@
 package lt.sdacademy.advanced.services;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lt.sdacademy.advanced.models.devices.Device;
 
 public class ShoppingCartService {
@@ -20,6 +24,7 @@ public class ShoppingCartService {
     }
 
     public Device getTheMostExpensive() {
+        /*
         Device result = null;
 
         for (Device device : devices) {
@@ -29,9 +34,12 @@ public class ShoppingCartService {
         }
 
         return result;
+        */
+        return devices.stream().max(Comparator.comparing(Device::getPrice)).orElse(null);
     }
 
     public List<String> getDeviceNames() {
+        /*
         List<String> result = new ArrayList<>();
 
         for (Device device : devices) {
@@ -39,6 +47,11 @@ public class ShoppingCartService {
         }
 
         return result;
+        */
+        return devices
+            .stream()
+            .map(Device::getName)
+            .collect(toList());
     }
 
     public List<Device> getDevicesByName(String name) {
