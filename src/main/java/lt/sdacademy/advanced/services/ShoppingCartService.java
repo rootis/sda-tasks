@@ -1,5 +1,6 @@
 package lt.sdacademy.advanced.services;
 
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
@@ -8,7 +9,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lt.sdacademy.advanced.models.devices.Device;
 
 public class ShoppingCartService {
@@ -55,18 +55,14 @@ public class ShoppingCartService {
     }
 
     public List<Device> getDevicesByName(String name) {
-        List<Device> devices = new ArrayList<>();
-
-        for (Device device : this.devices) {
-            if (device.getName().equals(name)) {
-                devices.add(device);
-            }
-        }
-
-        return devices;
+        return devices
+            .stream()
+            .filter(d -> d.getName().equals(name))
+            .collect(toList());
     }
 
     public Map<String, List<Device>> groupByName() {
+        /*
         Map<String, List<Device>> result = new HashMap<>();
 
         for (Device device : devices) {
@@ -77,6 +73,8 @@ public class ShoppingCartService {
         }
 
         return result;
+        */
+        return devices.stream().collect(groupingBy(Device::getName));
     }
 
     public Map<String, Integer> calculateDeviceAmounts() {
