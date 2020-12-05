@@ -1,23 +1,12 @@
 package lt.sdacademy.university.services;
 
-import lt.sdacademy.university.models.entities.StudyProgramEntity;
-import lt.sdacademy.university.repositories.StudyProgramRepository;
+import lt.sdacademy.university.models.dto.StudyProgram;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudyProgramService {
 
-    private final StudyProgramRepository studyProgramRepository;
-
-    public StudyProgramService(StudyProgramRepository studyProgramRepository) {
-        this.studyProgramRepository = studyProgramRepository;
-    }
-
-    public StudyProgramEntity save(StudyProgramEntity studyProgram) {
-        return studyProgramRepository.save(studyProgram);
-    }
-
-    public StudyProgramEntity getStudyProgramByTitle(String title) {
-        return studyProgramRepository.findOneByTitle(title);
+    public StudyProgram getStudyProgram() {
+        return new StudyProgram(2L, "Spring", null);
     }
 }

@@ -1,12 +1,14 @@
 package lt.sdacademy.university;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import lt.sdacademy.university.services.StudyProgramService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@SpringBootApplication
 public class UniversityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UniversityApplication.class, args);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext("lt.sdacademy.university");
+
+        System.out.println(applicationContext.getBean(StudyProgramService.class).getStudyProgram());
     }
 }

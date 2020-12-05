@@ -42,4 +42,13 @@ public class StudyProgram {
     public void setModules(List<String> modules) {
         this.modules = modules;
     }
+
+    @Override
+    public String toString() {
+        return "StudyProgram{" +
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", modules=" + modules +
+            '}';
+    }
 }
