@@ -14,5 +14,5 @@ public interface UniversityRepository extends Repository<UniversityEntity, Long>
 
     UniversityEntity save(UniversityEntity university);
 
-    void delete(UniversityEntity university);
+    void deleteById(Long id);
 }

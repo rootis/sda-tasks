@@ -10,13 +10,16 @@ public class StudyProgram {
 
     private List<String> modules;
 
+    private String universityTitle;
+
     public StudyProgram() {
     }
 
-    public StudyProgram(Long id, String title, List<String> modules) {
+    public StudyProgram(Long id, String title, List<String> modules, String universityTitle) {
         this.id = id;
         this.title = title;
         this.modules = modules;
+        this.universityTitle = universityTitle;
     }
 
     public Long getId() {
@@ -41,5 +44,13 @@ public class StudyProgram {
 
     public void setModules(List<String> modules) {
         this.modules = modules;
+    }
+
+    public String getUniversityTitle() {
+        return universityTitle;
+    }
+
+    public void setUniversityTitle(String universityTitle) {
+        this.universityTitle = universityTitle;
     }
 }

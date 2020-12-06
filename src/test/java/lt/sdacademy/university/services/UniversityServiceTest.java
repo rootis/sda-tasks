@@ -74,7 +74,7 @@ class UniversityServiceTest {
         List<University> universities = universityService.getUniversities();
         int oldSize = universities.size();
 
-        universityService.delete(universities.get(0));
+        universityService.delete(universities.get(0).getId());
         universities = universityService.getUniversities();
 
         assertEquals(oldSize - 1, universities.size());

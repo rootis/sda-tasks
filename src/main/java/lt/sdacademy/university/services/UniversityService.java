@@ -33,8 +33,13 @@ public class UniversityService {
         return universityRepository.save(university);
     }
 
-    public void delete(University university) {
-        UniversityEntity universityEntity = universityConverter.convertToEntity(university);
-        universityRepository.delete(universityEntity);
+    public University save(University university) {
+        UniversityEntity result = universityRepository.save(universityConverter.convertToEntity(university));
+
+        return universityConverter.convert(result);
+    }
+
+    public void delete(Long id) {
+        universityRepository.deleteById(id);
     }
 }

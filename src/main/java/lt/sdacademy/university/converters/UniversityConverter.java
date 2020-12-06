@@ -16,7 +16,7 @@ public class UniversityConverter extends AbstractConverter<UniversityEntity, Uni
 
     @Override
     public University convert(UniversityEntity university) {
-        return new University(university.getId(), university.getTitle());
+        return new University(university.getId(), university.getCode(), university.getTitle());
     }
 
     public UniversityEntity convertToEntity(University university) {
@@ -26,6 +26,7 @@ public class UniversityConverter extends AbstractConverter<UniversityEntity, Uni
             result = universityRepository.findById(university.getId());
         }
 
+        result.setCode(university.getCode());
         result.setTitle(university.getTitle());
 
         return result;
