@@ -1,9 +1,13 @@
 package lt.sdacademy.university.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import javax.transaction.Transactional;
+import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.models.entities.StudyProgramEntity;
 import lt.sdacademy.university.models.entities.UniversityEntity;
 import org.junit.jupiter.api.Test;
@@ -19,7 +23,7 @@ class UniversityServiceTest {
 
     @Test
     void getUniversities() {
-        List<UniversityEntity> result = universityService.getUniversities();
+        List<University> result = universityService.getUniversities();
 
         assertFalse(result.isEmpty());
     }
@@ -67,7 +71,7 @@ class UniversityServiceTest {
 
     @Test
     void delete() {
-        List<UniversityEntity> universities = universityService.getUniversities();
+        List<University> universities = universityService.getUniversities();
         int oldSize = universities.size();
 
         universityService.delete(universities.get(0));
