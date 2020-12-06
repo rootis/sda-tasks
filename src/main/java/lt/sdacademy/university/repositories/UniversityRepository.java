@@ -8,6 +8,8 @@ public interface UniversityRepository extends Repository<UniversityEntity, Long>
 
     List<UniversityEntity> findAll();
 
+    UniversityEntity findOne(Long id);
+
     List<UniversityEntity> findAllByStudyProgramsTitle(String title);
 
     UniversityEntity save(UniversityEntity university);

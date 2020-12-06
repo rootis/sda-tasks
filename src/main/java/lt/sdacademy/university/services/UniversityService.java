@@ -3,9 +3,7 @@ package lt.sdacademy.university.services;
 import java.util.List;
 import lt.sdacademy.university.converters.UniversityConverter;
 import lt.sdacademy.university.models.dto.University;
-import lt.sdacademy.university.models.entities.PersonEntity;
 import lt.sdacademy.university.models.entities.UniversityEntity;
-import lt.sdacademy.university.repositories.PersonRepository;
 import lt.sdacademy.university.repositories.UniversityRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +34,7 @@ public class UniversityService {
     }
 
     public void delete(University university) {
-        // universityRepository.delete(university);
+        UniversityEntity universityEntity = universityConverter.convertToEntity(university);
+        universityRepository.delete(universityEntity);
     }
 }
