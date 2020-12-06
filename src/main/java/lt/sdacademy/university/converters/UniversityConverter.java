@@ -23,7 +23,7 @@ public class UniversityConverter extends AbstractConverter<UniversityEntity, Uni
         UniversityEntity result = new UniversityEntity();
 
         if (university.getId() != null) {
-            result = universityRepository.findOne(university.getId());
+            result = universityRepository.findById(university.getId());
         }
 
         result.setTitle(university.getTitle());

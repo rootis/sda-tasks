@@ -8,7 +8,7 @@ public interface UniversityRepository extends Repository<UniversityEntity, Long>
 
     List<UniversityEntity> findAll();
 
-    UniversityEntity findOne(Long id);
+    UniversityEntity findById(Long id);
 
     List<UniversityEntity> findAllByStudyProgramsTitle(String title);
 
