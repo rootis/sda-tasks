@@ -3,6 +3,8 @@ package lt.sdacademy.university.controllers;
 import java.util.List;
 import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.services.UniversityService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,9 +39,9 @@ public class UniversityController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteUniversity(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUniversity(@PathVariable Long id) {
         universityService.delete(id);
 
-        return true;
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
