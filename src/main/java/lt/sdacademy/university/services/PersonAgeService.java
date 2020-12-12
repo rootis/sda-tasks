@@ -19,6 +19,16 @@ public class PersonAgeService {
         return people.stream().collect(groupingBy(Person::getName));
     }
 
+    public Map<Integer, List<Person>> getPeopleByAge(List<Person> people) {
+        // TODO: write implementation
+        return null;
+    }
+
+    public Map<Integer, List<String>> getNamesByAge(List<Person> people) {
+        // TODO: write implementation
+        return null;
+    }
+
     public Map<String, Double> getAverageNameAge(List<Person> people) {
         Map<String, Double> result = new HashMap<>();
         getPeopleByName(people).forEach((key, value) -> result.put(key, value.stream().mapToDouble(Person::getAge).average().orElse(0)));
