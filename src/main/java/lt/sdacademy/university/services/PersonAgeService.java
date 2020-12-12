@@ -1,6 +1,8 @@
 package lt.sdacademy.university.services;
 
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,13 +22,12 @@ public class PersonAgeService {
     }
 
     public Map<Integer, List<Person>> getPeopleByAge(List<Person> people) {
-        // TODO: write implementation
-        return null;
+        return people.stream().collect(groupingBy(Person::getAge));
     }
 
     public Map<Integer, List<String>> getNamesByAge(List<Person> people) {
-        // TODO: write implementation
-        return null;
+        return people.stream()
+            .collect(groupingBy(Person::getAge, mapping(Person::getName, toList())));
     }
 
     public Map<String, Double> getAverageNameAge(List<Person> people) {
