@@ -1,17 +1,21 @@
 package lt.sdacademy.university.models.dto;
 
+import java.util.List;
+
 public class University {
 
     private Long id;
     private String code;
     private String title;
     private Integer numberOfStudyPrograms;
+    private List<StudyProgram> studyPrograms;
 
-    public University(Long id, String code, String title, Integer numberOfStudyPrograms) {
+    public University(Long id, String code, String title, Integer numberOfStudyPrograms, List<StudyProgram> studyPrograms) {
         this.id = id;
         this.code = code;
         this.title = title;
         this.numberOfStudyPrograms = numberOfStudyPrograms;
+        this.studyPrograms = studyPrograms;
     }
 
     public Long getId() {
@@ -44,5 +48,13 @@ public class University {
 
     public void setNumberOfStudyPrograms(Integer numberOfStudyPrograms) {
         this.numberOfStudyPrograms = numberOfStudyPrograms;
+    }
+
+    public List<StudyProgram> getStudyPrograms() {
+        return studyPrograms;
+    }
+
+    public void setStudyPrograms(List<StudyProgram> studyPrograms) {
+        this.studyPrograms = studyPrograms;
     }
 }

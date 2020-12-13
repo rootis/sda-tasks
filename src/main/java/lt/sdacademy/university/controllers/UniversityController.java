@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/universities")
 public class UniversityController {
 
-    private UniversityService universityService;
+    private final UniversityService universityService;
 
     public UniversityController(UniversityService universityService) {
         this.universityService = universityService;
@@ -30,9 +30,9 @@ public class UniversityController {
         return universityService.getUniversities();
     }
 
-    @GetMapping("/{id}")
-    public University getUniversity(@PathVariable Long id) {
-        return null;
+    @GetMapping("/{universityId}")
+    public University getUniversity(@PathVariable Long universityId) {
+        return universityService.getUniversity(universityId);
     }
 
     @PostMapping

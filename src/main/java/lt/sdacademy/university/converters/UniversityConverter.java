@@ -8,15 +8,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class UniversityConverter extends AbstractConverter<UniversityEntity, University> {
 
+    private final StudyProgramConverter studyProgramConverter;
     private final UniversityRepository universityRepository;
 
-    public UniversityConverter(UniversityRepository universityRepository) {
+    public UniversityConverter(StudyProgramConverter studyProgramConverter, UniversityRepository universityRepository) {
+        this.studyProgramConverter = studyProgramConverter;
         this.universityRepository = universityRepository;
     }
 
     @Override
     public University convert(UniversityEntity university) {
-        return new University(university.getId(), university.getCode(), university.getTitle(), university.getStudyPrograms().size());
+        return new University(
+            university.getId(),
+            university.getCode(),
+            university.getTitle(),
+            university.getStudyPrograms().size(),
+            studyProgramConverter.convert(university.getStudyPrograms())
+        );
     }
 
     public UniversityEntity convertToEntity(University university) {

@@ -20,9 +20,11 @@ public class UniversityService {
     }
 
     public List<University> getUniversities() {
-        List<UniversityEntity> universities = universityRepository.findAll();
+        return universityConverter.convert(universityRepository.findAll());
+    }
 
-        return universityConverter.convert(universities);
+    public University getUniversity(Long universityId) {
+        return universityConverter.convert(universityRepository.findById(universityId));
     }
 
     public List<UniversityEntity> getUniversitiesByStudyProgramTitle(String studyProgramTitle) {
