@@ -42,7 +42,7 @@ class StudyProgramServiceTest {
         StudyProgram result = studyProgramService.getStudyProgramWithModule("Module Title");
 
         assertNotNull(result);
-        assertEquals(1, result.getNumberOfModules());
+        assertFalse(result.getModules().isEmpty());
     }
 
     @Test
