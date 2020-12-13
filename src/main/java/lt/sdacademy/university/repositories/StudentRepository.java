@@ -12,6 +12,9 @@ public interface StudentRepository extends Repository<StudentEntity, Long> {
     @Query("SELECT s FROM StudentEntity s")
     List<StudentEntity> findAll();
 
+    @Query("select s from StudentEntity s where s.person.name LIKE %:fragment%")
+    List<StudentEntity> findAllByPersonName(@Param("fragment") String fragment);
+
     @Query("SELECT s FROM StudentEntity s where s.person.gender = :gender")
     List<StudentEntity> findAllByPersonGender(@Param("gender") Gender gender);
 }

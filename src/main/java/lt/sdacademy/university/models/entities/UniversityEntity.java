@@ -18,7 +18,10 @@ public class UniversityEntity extends AbstractEntity {
     @Column(name = "title", length = 250, nullable = false)
     private String title;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "university", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "university", orphanRemoval = true)
+    private List<UniversityLecturerEntity> universityLecturers = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "university", orphanRemoval = true)
     private List<StudyProgramEntity> studyPrograms = new ArrayList<>();
 
     public String getCode() {
@@ -35,6 +38,14 @@ public class UniversityEntity extends AbstractEntity {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<UniversityLecturerEntity> getUniversityLecturers() {
+        return universityLecturers;
+    }
+
+    public void setUniversityLecturers(List<UniversityLecturerEntity> universityLecturers) {
+        this.universityLecturers = universityLecturers;
     }
 
     public List<StudyProgramEntity> getStudyPrograms() {

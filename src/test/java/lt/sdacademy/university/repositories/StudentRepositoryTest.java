@@ -25,6 +25,13 @@ class StudentRepositoryTest {
     }
 
     @Test
+    void findAllByPersonName() {
+        List<StudentEntity> result = studentRepository.findAllByPersonName("v");
+
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
     void findAllByPersonGender() {
         List<StudentEntity> result = studentRepository.findAllByPersonGender(Gender.male);
 
