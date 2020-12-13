@@ -10,7 +10,7 @@ public interface UniversityRepository extends Repository<UniversityEntity, Long>
 
     List<UniversityEntity> findAll();
 
-    @Query("SELECT u FROM UniversityEntity u join u.universityLecturers ul join ul.lecturer l join l.person p WHERE p.name LIKE %:lecturerName%")
+    @Query("SELECT DISTINCT u FROM UniversityEntity u join u.universityLecturers ul join ul.lecturer l join l.person p WHERE p.name LIKE %:lecturerName%")
     List<UniversityEntity> findAllByLecturerName(@Param("lecturerName") String lecturerName);
 
     UniversityEntity findById(Long id);
