@@ -23,7 +23,7 @@ public class UniversityConverter extends AbstractConverter<UniversityEntity, Uni
             university.getId(),
             university.getCode(),
             university.getTitle(),
-            university.getStudyPrograms().size(),
+            university.getStudyPrograms() == null ? 0 : university.getStudyPrograms().size(),
             studyProgramConverter.convert(university.getStudyPrograms())
         );
     }
