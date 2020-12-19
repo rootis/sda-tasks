@@ -4,6 +4,7 @@ import java.util.List;
 import javax.validation.Valid;
 import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.services.UniversityService;
+import lt.sdacademy.university.validators.UniversityValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,9 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UniversityController {
 
     private final UniversityService universityService;
+    private final UniversityValidator universityValidator;
 
-    public UniversityController(UniversityService universityService) {
+    public UniversityController(UniversityService universityService, UniversityValidator universityValidator) {
         this.universityService = universityService;
+        this.universityValidator = universityValidator;
     }
 
     @GetMapping
@@ -38,6 +41,8 @@ public class UniversityController {
 
     @PostMapping
     public University save(@RequestBody @Valid University university) {
+        universityValidator.validate(university);
+
         return universityService.save(university);
     }
 
