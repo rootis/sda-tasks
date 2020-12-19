@@ -1,4 +1,12 @@
 -- DDL
+create table user
+(
+    id bigint unsigned auto_increment primary key,
+    email varchar(250) not null unique,
+    password varchar(60) not null,
+    name varchar(50) not null
+);
+
 CREATE TABLE university
 (
     id bigint unsigned auto_increment primary key,
