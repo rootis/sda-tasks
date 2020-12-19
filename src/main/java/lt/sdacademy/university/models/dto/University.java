@@ -1,13 +1,21 @@
 package lt.sdacademy.university.models.dto;
 
 import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class University {
 
     private Long id;
+
+    @NotEmpty
+    @Size(min = 2, max = 10)
     private String code;
+
     private String title;
+
     private Integer numberOfStudyPrograms;
+
     private List<StudyProgram> studyPrograms;
 
     public University(Long id, String code, String title, Integer numberOfStudyPrograms, List<StudyProgram> studyPrograms) {

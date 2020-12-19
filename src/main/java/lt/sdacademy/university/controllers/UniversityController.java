@@ -1,6 +1,7 @@
 package lt.sdacademy.university.controllers;
 
 import java.util.List;
+import javax.validation.Valid;
 import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.services.UniversityService;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ public class UniversityController {
     }
 
     @PostMapping
-    public University save(@RequestBody University university) {
+    public University save(@RequestBody @Valid University university) {
         return universityService.save(university);
     }
 
