@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.models.entities.StudyProgramEntity;
 import lt.sdacademy.university.models.entities.UniversityEntity;
+import lt.sdacademy.university.repositories.StudyProgramRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 @Transactional
 class UniversityServiceTest {
+
+    @Autowired
+    private StudyProgramRepository studyProgramRepository;
 
     @Autowired
     private UniversityService universityService;
@@ -39,6 +43,30 @@ class UniversityServiceTest {
         assertNotNull(university.getId());
         assertEquals("TST", university.getCode());
         assertEquals("Test University", university.getTitle());
+    }
+
+    @Test
+    void save_studyProgramSaveDelete() {
+        UniversityEntity university = new UniversityEntity();
+        university.setCode("TST");
+        university.setTitle("Test University");
+        StudyProgramEntity studyProgram = new StudyProgramEntity();
+        studyProgram.setTitle("Test Study Program");
+        studyProgram.setUniversity(university);
+        university.getStudyPrograms().add(studyProgram);
+
+        university = universityService.save(university);
+
+        assertNotNull(university.getId());
+        assertNotNull(university.getStudyPrograms().get(0).getId());
+
+        university.getStudyPrograms().remove(studyProgram);
+
+        Integer studyProgramAmount = studyProgramRepository.findAll().size();
+        university = universityService.save(university);
+
+        assertTrue(university.getStudyPrograms().isEmpty());
+        assertEquals(studyProgramAmount - 1, studyProgramRepository.findAll().size());
     }
 
     @Test

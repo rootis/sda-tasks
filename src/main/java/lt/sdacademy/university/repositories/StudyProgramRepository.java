@@ -6,7 +6,7 @@ import org.springframework.data.repository.Repository;
 
 public interface StudyProgramRepository extends Repository<StudyProgramEntity, Long> {
 
-    StudyProgramEntity findOneById(Long id);
+    StudyProgramEntity findById(Long id);
 
     List<StudyProgramEntity> findAll();
 

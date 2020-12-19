@@ -7,6 +7,8 @@ import org.springframework.data.repository.Repository;
 
 public interface ModuleRepository extends Repository<ModuleEntity, Long> {
 
+    ModuleEntity findById(Long id);
+
     List<ModuleEntity> findAll();
 
     List<ModuleEntity> findAllByTitle(String title);

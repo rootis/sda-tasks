@@ -1,6 +1,7 @@
 package lt.sdacademy.university.converters;
 
 import lt.sdacademy.university.models.dto.University;
+import lt.sdacademy.university.models.entities.StudyProgramEntity;
 import lt.sdacademy.university.models.entities.UniversityEntity;
 import lt.sdacademy.university.repositories.UniversityRepository;
 import org.springframework.stereotype.Component;
@@ -36,6 +37,11 @@ public class UniversityConverter extends AbstractConverter<UniversityEntity, Uni
 
         result.setCode(university.getCode());
         result.setTitle(university.getTitle());
+        result.setStudyPrograms(studyProgramConverter.convertToEntity(university.getStudyPrograms()));
+
+        for (StudyProgramEntity studyProgram : result.getStudyPrograms()) {
+            studyProgram.setUniversity(result);
+        }
 
         return result;
     }
