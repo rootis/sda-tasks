@@ -9,7 +9,6 @@ import lt.sdacademy.university.converters.UserConverter;
 import lt.sdacademy.university.models.dto.User;
 import lt.sdacademy.university.models.entities.UserEntity;
 import lt.sdacademy.university.repositories.UserRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,11 +43,10 @@ public class SecurityService implements UserDetailsService {
         return userConverter.convert(userRepository.save(userEntity));
     }
 
-    public String generateToken(Long id, String username) {
+    public String generateToken(String email) {
         return Jwts.builder()
             .setClaims(new HashMap<>())
-            .setId(id.toString())
-            .setSubject(username)
+            .setSubject(email)
             .setIssuedAt(new Date(System.currentTimeMillis()))
             .setExpiration(new Date(System.currentTimeMillis() + JwtAuthFilter.VALIDITY))
             .signWith(SignatureAlgorithm.HS512, JwtAuthFilter.SECRET)

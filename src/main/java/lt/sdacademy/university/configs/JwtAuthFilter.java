@@ -18,10 +18,10 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 public class JwtAuthFilter extends BasicAuthenticationFilter {
 
-    private static final String HEADER = "Authorization";
-    private static final String PREFIX = "Bearer ";
     public static final String SECRET = "f0-fU)Ire(rJ#a34_rJP-O67es";
     public static final int VALIDITY = 60 * 60 * 1000;
+    private static final String HEADER = "Authorization";
+    private static final String PREFIX = "Bearer ";
 
     public JwtAuthFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
@@ -35,12 +35,11 @@ public class JwtAuthFilter extends BasicAuthenticationFilter {
             String jwtToken = requestTokenHeader.substring(PREFIX.length());
             try {
                 Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwtToken).getBody();
-                String id = claims.getId();
-                String username = claims.getSubject();
+                String email = claims.getSubject();
                 Date tokenExpirationDate = claims.getExpiration();
 
                 if (tokenExpirationDate.after(new Date())) {
-                    Authentication authentication = new UsernamePasswordAuthenticationToken(new User(Long.parseLong(id), username), null, new ArrayList<>());
+                    Authentication authentication = new UsernamePasswordAuthenticationToken(new User(email), null, new ArrayList<>());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             } catch (Exception e) {

@@ -30,7 +30,7 @@ public class AuthController {
         UserEntity userEntity = securityService.loadUserByUsername(user.getEmail());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEntity, user.getPassword()));
 
-        return new Token(securityService.generateToken(userEntity.getId(), userEntity.getEmail()));
+        return new Token(securityService.generateToken(userEntity.getEmail()));
     }
 
     @PostMapping("/sign-up")
