@@ -20,6 +20,14 @@ public class User {
     @Size(max = 50)
     private String name;
 
+    public User() {
+    }
+
+    public User(Long id, String email) {
+        this.id = id;
+        this.email = email;
+    }
+
     public User(Long id, String email, String name) {
         this.id = id;
         this.email = email;
