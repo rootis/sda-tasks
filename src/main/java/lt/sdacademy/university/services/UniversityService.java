@@ -5,6 +5,7 @@ import lt.sdacademy.university.converters.UniversityConverter;
 import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.models.entities.UniversityEntity;
 import lt.sdacademy.university.repositories.UniversityRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,10 @@ public class UniversityService {
     public UniversityService(UniversityConverter universityConverter, UniversityRepository universityRepository) {
         this.universityConverter = universityConverter;
         this.universityRepository = universityRepository;
+    }
+
+    public List<University> getUniversities(Integer page, Integer size) {
+        return universityConverter.convert(universityRepository.findAll(PageRequest.of(page, size)));
     }
 
     public List<University> getUniversities() {
