@@ -1,10 +1,23 @@
 package lt.sdacademy.university.models.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class User {
 
     private Long id;
+
+    @Email
+    @NotEmpty
+    @Size(max = 250)
     private String email;
+
+    @NotEmpty
     private String password;
+
+    @NotEmpty
+    @Size(max = 50)
     private String name;
 
     public User(Long id, String email, String name) {

@@ -8,4 +8,6 @@ public interface UserRepository extends Repository<UserEntity, Long> {
     UserEntity findById(Long id);
 
     UserEntity save(UserEntity userEntity);
+
+    boolean existsByEmail(String email);
 }
