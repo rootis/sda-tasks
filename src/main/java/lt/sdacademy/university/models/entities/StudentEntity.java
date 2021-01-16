@@ -1,6 +1,7 @@
 package lt.sdacademy.university.models.entities;
 
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lt.sdacademy.university.models.StudyType;
+
+/*
+CRUD students
+Person -> Student
+Person -> Lecturer
+ */
 
 @Entity
 @Table(name = "student")
@@ -22,7 +29,7 @@ public class StudentEntity extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private StudyType studyType;
 
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "person_id", nullable = false)
     private PersonEntity person;
 

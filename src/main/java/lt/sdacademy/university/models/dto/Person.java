@@ -1,13 +1,27 @@
 package lt.sdacademy.university.models.dto;
 
+import lt.sdacademy.university.models.Gender;
+
 public class Person {
 
+    private Long id;
     private String name;
-    private Integer age;
+    private String surname;
+    private Gender gender;
 
-    public Person(String name, Integer age) {
+    public Person(Long id, String name, String surname, Gender gender) {
+        this.id = id;
         this.name = name;
-        this.age = age;
+        this.surname = surname;
+        this.gender = gender;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -18,11 +32,19 @@ public class Person {
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

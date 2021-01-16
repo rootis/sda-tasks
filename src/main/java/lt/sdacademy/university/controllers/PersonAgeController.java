@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PersonAgeController {
 
-    @GetMapping("/zmogus")
+/*    @GetMapping("/zmogus")
     public Person getPerson() {
         return new Person("Rutenis", 31);
     }
@@ -17,5 +17,5 @@ public class PersonAgeController {
     @PostMapping("/zmogus")
     public Person getPerson2() {
         return new Person("Rutenis2", 31);
-    }
+    }*/
 }

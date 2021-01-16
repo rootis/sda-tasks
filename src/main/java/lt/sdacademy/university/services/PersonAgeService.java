@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonAgeService {
 
-    public Person getOldestPerson(List<Person> people) {
+/*    public Person getOldestPerson(List<Person> people) {
         return null;
     }
 
@@ -35,5 +35,5 @@ public class PersonAgeService {
         getPeopleByName(people).forEach((key, value) -> result.put(key, value.stream().mapToDouble(Person::getAge).average().orElse(0)));
 
         return result;
-    }
+    }*/
 }

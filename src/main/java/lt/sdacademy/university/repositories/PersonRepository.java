@@ -8,5 +8,9 @@ public interface PersonRepository extends Repository<PersonEntity, Long> {
 
     List<PersonEntity> findAll();
 
+    PersonEntity findById(Long id);
+
     List<PersonEntity> findAllByName(String name);
+
+    void deleteById(Long id);
 }

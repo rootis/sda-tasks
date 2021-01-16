@@ -19,7 +19,7 @@ class StudentServiceTest {
     @Autowired
     private StudentService studentService;
 
-    @Test
+/*    @Test
     void getStudents() {
         List<StudentEntity> result = studentService.getStudents();
 
@@ -32,5 +32,5 @@ class StudentServiceTest {
         List<StudentEntity> result = studentService.getStudentsByGender(Gender.male);
 
         result.forEach(s -> assertEquals(Gender.male, s.getPerson().getGender()));
-    }
+    }*/
 }

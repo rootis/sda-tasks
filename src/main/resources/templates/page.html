@@ -24,12 +24,16 @@
       <tr>
         <th scope="col">Code</th>
         <th scope="col">Title</th>
+        <th scope="col">Study Programs</th>
       </tr>
     </thead>
     <tbody>
       <tr th:each="university : ${universities}">
         <td><span th:text="${university.getCode()}"></span></td>
         <td><span th:text="${university.getTitle()}"></span></td>
+        <td>
+          <span th:each="studyProgram : ${university.getStudyPrograms()}" th:text="${studyProgram.getTitle()} + ', '"></span>
+        </td>
       </tr>
     </tbody>
   </table>
