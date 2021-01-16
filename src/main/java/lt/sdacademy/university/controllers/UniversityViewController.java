@@ -18,11 +18,9 @@ public class UniversityViewController {
 
     @GetMapping
     public String getUniversities(Model model) {
-        /*
-            return universityService.getUniversities();
-        }*/
         model.addAttribute("headerText", "SDA Spring Course");
         model.addAttribute("pageTitle", "Universities");
+        model.addAttribute("universities", universityService.getUniversities());
 
         return "page";
     }

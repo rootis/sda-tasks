@@ -11,7 +11,29 @@
   <a class="navbar-brand" href="#" th:text="${headerText}"></a>
 </nav>
 
-<h1 th:text="${pageTitle}"></h1>
+<main role="main" class="container">
+  <div class="starter-template">
+    <h1 th:text="${pageTitle}"></h1>
+    <h3 style="text-align: center">
+      <span th:text="${pageTitle}"></span>
+    </h3>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="university : ${universities}">
+        <td><span th:text="${university.getCode()}"></span></td>
+        <td><span th:text="${university.getTitle()}"></span></td>
+      </tr>
+    </tbody>
+  </table>
+</main>
 
 </body>
 </html>
