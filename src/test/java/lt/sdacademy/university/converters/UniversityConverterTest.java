@@ -2,6 +2,7 @@ package lt.sdacademy.university.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.when;
 
 import lt.sdacademy.university.builders.UniversityBuilder;
 import lt.sdacademy.university.builders.UniversityEntityBuilder;
@@ -55,10 +56,15 @@ class UniversityConverterTest {
     @Test
     void convertToEntity() {
         University university = UniversityBuilder.init()
+            .withId(2L)
             .withCode("TEST_CODE")
             .withTitle("Test title")
             .build();
+        when(universityRepository.findById(2L)).thenReturn(UniversityEntityBuilder.init().withId(2L).build());
+
         UniversityEntity result = universityConverter.convertToEntity(university);
+
+        assertEquals(2L, result.getId());
         assertEquals("TEST_CODE", result.getCode());
         assertEquals("Test title", result.getTitle());
     }
