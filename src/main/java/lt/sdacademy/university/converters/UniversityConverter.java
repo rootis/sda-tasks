@@ -19,6 +19,10 @@ public class UniversityConverter extends AbstractConverter<UniversityEntity, Uni
 
     @Override
     public University convert(UniversityEntity university) {
+        if (university == null) {
+            return null;
+        }
+
         return new University(
             university.getId(),
             university.getCode(),
