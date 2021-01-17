@@ -6,13 +6,15 @@ import javax.transaction.Transactional;
 import lt.sdacademy.university.models.entities.ModuleEntity;
 import lt.sdacademy.university.models.entities.StudyProgramEntity;
 import lt.sdacademy.university.models.entities.UniversityEntity;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Transactional
-class StudyProgramServiceTest {
+@Tag("integration")
+class StudyProgramServiceIT {
 
     @Autowired
     private UniversityService universityService;

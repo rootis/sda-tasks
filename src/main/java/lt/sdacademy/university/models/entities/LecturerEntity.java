@@ -1,5 +1,6 @@
 package lt.sdacademy.university.models.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "lecturer")
 public class LecturerEntity extends AbstractEntity {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false)
     private PersonEntity person;
 

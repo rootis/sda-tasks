@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.util.List;
 import javax.transaction.Transactional;
 import lt.sdacademy.university.models.entities.PersonEntity;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Transactional
-class PersonServiceTest {
+@Tag("integration")
+class PersonServiceIT {
 
     @Autowired
     private PersonService personService;

@@ -11,13 +11,15 @@ import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.models.entities.StudyProgramEntity;
 import lt.sdacademy.university.models.entities.UniversityEntity;
 import lt.sdacademy.university.repositories.StudyProgramRepository;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Transactional
-class UniversityServiceTest {
+@Tag("integration")
+class UniversityServiceIT {
 
     @Autowired
     private StudyProgramRepository studyProgramRepository;
