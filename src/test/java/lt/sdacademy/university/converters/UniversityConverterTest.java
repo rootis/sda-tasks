@@ -1,8 +1,9 @@
 package lt.sdacademy.university.converters;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+import lt.sdacademy.university.builders.UniversityBuilder;
 import lt.sdacademy.university.builders.UniversityEntityBuilder;
 import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.models.entities.UniversityEntity;
@@ -49,5 +50,23 @@ class UniversityConverterTest {
         UniversityEntity universityEntity = null;
 
         assertNull(universityConverter.convert(universityEntity));
+    }
+
+    @Test
+    void convertToEntity() {
+        University university = UniversityBuilder.init()
+            .withCode("TEST_CODE")
+            .withTitle("Test title")
+            .build();
+        UniversityEntity result = universityConverter.convertToEntity(university);
+        assertEquals("TEST_CODE", result.getCode());
+        assertEquals("Test title", result.getTitle());
+    }
+
+    @Test
+    void convertToEntity_valueIsNull() {
+        University university = null;
+
+        assertNull(universityConverter.convertToEntity(university));
     }
 }

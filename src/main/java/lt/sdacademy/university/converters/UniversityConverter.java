@@ -33,6 +33,10 @@ public class UniversityConverter extends AbstractConverter<UniversityEntity, Uni
     }
 
     public UniversityEntity convertToEntity(University university) {
+        if (university == null) {
+            return null;
+        }
+
         UniversityEntity result = new UniversityEntity();
 
         if (university.getId() != null) {
