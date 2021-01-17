@@ -18,6 +18,9 @@ public class University {
 
     private List<StudyProgram> studyPrograms;
 
+    public University() {
+    }
+
     public University(Long id, String code, String title, Integer numberOfStudyPrograms, List<StudyProgram> studyPrograms) {
         this.id = id;
         this.code = code;

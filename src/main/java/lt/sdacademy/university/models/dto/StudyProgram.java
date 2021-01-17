@@ -9,6 +9,9 @@ public class StudyProgram {
     private String universityCode;
     private List<Module> modules;
 
+    public StudyProgram() {
+    }
+
     public StudyProgram(Long id, String title, String universityCode, List<Module> modules) {
         this.id = id;
         this.title = title;

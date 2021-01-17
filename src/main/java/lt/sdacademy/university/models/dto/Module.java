@@ -5,6 +5,9 @@ public class Module {
     private Long id;
     private String title;
 
+    public Module() {
+    }
+
     public Module(Long id, String title) {
         this.id = id;
         this.title = title;
