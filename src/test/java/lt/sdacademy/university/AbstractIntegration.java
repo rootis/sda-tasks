@@ -1,5 +1,6 @@
 package lt.sdacademy.university;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -34,6 +35,11 @@ public abstract class AbstractIntegration {
     protected <T> T sendPost(String url, Object body, TypeReference<T> type) throws Exception {
         return sendRequest(post(url).contentType("application/json").content(objectMapper.writeValueAsString(body)), type);
     }
+
+    protected <T> T sendDelete(String url, TypeReference<T> type) throws Exception {
+        return sendRequest(delete(url), type);
+    }
+
 
     private <T> T sendRequest(MockHttpServletRequestBuilder requestBuilder, TypeReference<T> type) throws Exception {
         MvcResult result = mvc.perform(requestBuilder).andReturn();
