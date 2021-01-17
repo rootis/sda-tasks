@@ -52,9 +52,9 @@ public class UniversityController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUniversity(@PathVariable Long id) {
+    public ResponseEntity<Boolean> deleteUniversity(@PathVariable Long id) {
         universityService.delete(id);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body(true);
     }
 }

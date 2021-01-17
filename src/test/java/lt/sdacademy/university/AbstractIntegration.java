@@ -36,8 +36,8 @@ public abstract class AbstractIntegration {
         return sendRequest(post(url).contentType("application/json").content(objectMapper.writeValueAsString(body)), type);
     }
 
-    protected <T> T sendDelete(String url, TypeReference<T> type) throws Exception {
-        return sendRequest(delete(url), type);
+    protected <T> T sendDelete(String url, TypeReference<T> type, String token) throws Exception {
+        return sendRequest(delete(url).header("Authorization", "Bearer " + token), type);
     }
 
 

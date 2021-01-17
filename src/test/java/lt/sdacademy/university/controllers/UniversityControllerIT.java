@@ -1,10 +1,14 @@
 package lt.sdacademy.university.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import java.util.ArrayList;
 import java.util.List;
 import lt.sdacademy.university.AbstractIntegration;
+import lt.sdacademy.university.builders.UniversityBuilder;
 import lt.sdacademy.university.builders.UniversityEntityBuilder;
 import lt.sdacademy.university.models.dto.University;
 import lt.sdacademy.university.models.entities.UniversityEntity;
@@ -52,5 +56,37 @@ class UniversityControllerIT extends AbstractIntegration {
         assertEquals(university.getId(), result.getId());
         assertEquals("TEST", result.getCode());
         assertEquals("Test University", result.getTitle());
+    }
+
+    @Test
+    void saveUniversity() throws Exception {
+        University university = UniversityBuilder.init()
+            .withCode("TEST")
+            .withTitle("Test University")
+            .withStudyPrograms(new ArrayList<>())
+            .build();
+
+        University result = sendPost("/api/universities", university, new TypeReference<University>() {
+        });
+
+        assertNotNull(result.getId());
+        assertEquals("TEST", result.getCode());
+        assertEquals("Test University", result.getTitle());
+    }
+
+    @Test
+    void delete() throws Exception {
+        Integer numberOfUniversities = universityRepository.findAll().size();
+        UniversityEntity university = UniversityEntityBuilder.init()
+            .withCode("TEST")
+            .withTitle("Test University")
+            .build();
+        universityRepository.save(university);
+
+        Boolean result = sendDelete("/api/universities/" + university.getId(), new TypeReference<Boolean>() {
+        }, securityService.generateToken("rutenis.turcinas@gmail.com"));
+
+        assertTrue(result);
+        assertEquals(numberOfUniversities, universityRepository.findAll().size());
     }
 }
