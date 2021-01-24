@@ -15,8 +15,8 @@ public class CategoryConverter extends AbstractBiConverter<CategoryEntity, Categ
     }
 
     @Override
-    public Category convert(CategoryEntity obj) {
-        return null;
+    public Category convert(CategoryEntity category) {
+        return new Category(category.getId(), category.getTitle());
     }
 
     @Override
@@ -24,7 +24,7 @@ public class CategoryConverter extends AbstractBiConverter<CategoryEntity, Categ
         CategoryEntity result = category.getId() == null
             ? new CategoryEntity()
             : categoryRepository.findById(category.getId());
-        category.setTitle(category.getTitle());
+        result.setTitle(category.getTitle());
 
         return result;
     }

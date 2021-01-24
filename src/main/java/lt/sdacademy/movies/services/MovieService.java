@@ -27,8 +27,10 @@ public class MovieService {
     }
 
     public Movie save(Movie movie) {
-        MovieEntity result = movieRepository.save(movieConverter.convertToEntity(movie));
-        return movieConverter.convert(result);
+        MovieEntity movieEntity = movieConverter.convertToEntity(movie);
+        movieRepository.save(movieEntity);
+
+        return movieConverter.convert(movieEntity);
     }
 
     public void delete(Long movieId) {
