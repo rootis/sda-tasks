@@ -10,7 +10,7 @@ public interface MovieRepository extends Repository<MovieEntity, Long> {
 
     List<MovieEntity> findAll();
 
-    void deleteById(Long id);
-
     MovieEntity save(MovieEntity movie);
+
+    void deleteById(Long id);
 }
