@@ -8,18 +8,18 @@ import javax.validation.constraints.Size;
 
 public class Movie {
 
-    Long id;
+    private Long id;
 
     @NotEmpty
     @Size(max = 250)
-    String title;
+    private String title;
 
     @NotNull
-    Long categoryId;
+    private Category category;
 
-    String description;
+    private String description;
 
-    Integer year;
+    private Integer year;
 
     @Digits(integer = 2, fraction = 1)
     private BigDecimal imdbRating;
@@ -27,10 +27,11 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(Long id, String title, Long categoryId, String description, Integer year, BigDecimal imdbRating) {
+    public Movie(Long id, @NotEmpty @Size(max = 250) String title, @NotNull Category category, String description, Integer year,
+        @Digits(integer = 2, fraction = 1) BigDecimal imdbRating) {
         this.id = id;
         this.title = title;
-        this.categoryId = categoryId;
+        this.category = category;
         this.description = description;
         this.year = year;
         this.imdbRating = imdbRating;
@@ -52,12 +53,12 @@ public class Movie {
         this.title = title;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getDescription() {
