@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
     <groupId>lt.sdacademy</groupId>
-    <artifactId>empty</artifactId>
+    <artifactId>movies</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
 
