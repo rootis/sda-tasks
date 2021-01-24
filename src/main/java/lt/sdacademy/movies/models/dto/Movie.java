@@ -1,15 +1,40 @@
 package lt.sdacademy.movies.models.dto;
 
 import java.math.BigDecimal;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class Movie {
 
     Long id;
+
+    @NotEmpty
+    @Size(max = 250)
     String title;
+
+    @NotNull
     Long categoryId;
+
     String description;
+
     Integer year;
-    BigDecimal imdbRating;
+
+    @Digits(integer = 2, fraction = 1)
+    private BigDecimal imdbRating;
+
+    public Movie() {
+    }
+
+    public Movie(Long id, @NotEmpty @Size(max = 250) String title, @NotNull Long categoryId, String description, Integer year, BigDecimal imdbRating) {
+        this.id = id;
+        this.title = title;
+        this.categoryId = categoryId;
+        this.description = description;
+        this.year = year;
+        this.imdbRating = imdbRating;
+    }
 
     public Long getId() {
         return id;
