@@ -27,7 +27,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(Long id, @NotEmpty @Size(max = 250) String title, @NotNull Long categoryId, String description, Integer year, BigDecimal imdbRating) {
+    public Movie(Long id, String title, Long categoryId, String description, Integer year, BigDecimal imdbRating) {
         this.id = id;
         this.title = title;
         this.categoryId = categoryId;
