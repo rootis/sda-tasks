@@ -51,7 +51,7 @@ class UniversityControllerIT extends AbstractIntegration {
         universityRepository.save(university);
 
         University result = sendGet("/api/universities/" + university.getId(), new TypeReference<University>() {
-        }, securityService.generateToken("rutenis.turcinas@gmail.com"));
+        }, securityService.generateToken(1L,"rutenis.turcinas@gmail.com"));
 
         assertEquals(university.getId(), result.getId());
         assertEquals("TEST", result.getCode());
@@ -84,7 +84,7 @@ class UniversityControllerIT extends AbstractIntegration {
         universityRepository.save(university);
 
         Boolean result = sendDelete("/api/universities/" + university.getId(), new TypeReference<Boolean>() {
-        }, securityService.generateToken("rutenis.turcinas@gmail.com"));
+        }, securityService.generateToken(1L,"rutenis.turcinas@gmail.com"));
 
         assertTrue(result);
         assertEquals(numberOfUniversities, universityRepository.findAll().size());
