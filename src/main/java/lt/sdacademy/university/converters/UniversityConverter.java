@@ -45,8 +45,10 @@ public class UniversityConverter extends AbstractConverter<UniversityEntity, Uni
 
         result.setCode(university.getCode());
         result.setTitle(university.getTitle());
-        result.getStudyPrograms().clear();
-        result.getStudyPrograms().addAll(studyProgramConverter.convertToEntity(university.getStudyPrograms()));
+        if (university.getStudyPrograms() != null) {
+            result.getStudyPrograms().clear();
+            result.getStudyPrograms().addAll(studyProgramConverter.convertToEntity(university.getStudyPrograms()));
+        }
 
         if (result.getStudyPrograms() != null) {
             for (StudyProgramEntity studyProgram : result.getStudyPrograms()) {

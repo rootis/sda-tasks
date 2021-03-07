@@ -29,10 +29,10 @@ public class UniversityValidator {
     private void validateCode(University university, Map<String, String> errors) {
         if (university.getId() == null) {
             if (universityRepository.existsByCode(university.getCode())) {
-                errors.put("code", "such university already exists");
+                errors.put("code", "Such university already exists");
             }
         } else if (universityRepository.existsByCodeAndIdNot(university.getCode(), university.getId())) {
-            errors.put("code", "such university already exists");
+            errors.put("code", "Such university already exists");
         }
     }
 }
